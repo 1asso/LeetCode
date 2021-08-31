@@ -1,7 +1,7 @@
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         def nSum(l, r, target, N, result, results):
-            if N < 2 or target < nums[l] * N or target > nums[r] * N:
+            if target < nums[l] * N or target > nums[r] * N:
                 return
             if N == 2:
                 while l < r:
