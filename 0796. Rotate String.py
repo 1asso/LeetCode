@@ -11,7 +11,7 @@ class Solution:
     def compute(self, goal) -> list[int]:
         next = [0, 0]
         j = 0
-        for i in range(1, len(goal)):
+        for i in range(1, len(goal) - 1): # the last element in the next list doesn't matter
             while j > 0 and goal[i] != goal[j]:
                 j = next[j]
             if goal[i] == goal[j]:
@@ -25,7 +25,6 @@ class Solution:
         if len(s) == 0:
             return True
         s = s + s
-        res = []
         j = 0
         
         next = self.compute(goal)
@@ -36,6 +35,5 @@ class Solution:
             if s[i] == goal[j]:
                 j += 1
             if j == len(goal):
-                return True
-            
+                return True 
         return False
