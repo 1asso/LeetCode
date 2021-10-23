@@ -1,4 +1,29 @@
 Topological sort:
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # init
+        neighbors = defaultdict(list)
+        in_degree = {}
+        path = []
+        for dest, src in prerequisites:
+            neighbors[src].append(dest)
+            in_degree[dest] = in_degree.get(dest, 0) + 1
+        zero_indegree_queue = deque([i for i in range(numCourses) if i not in in_degree])
+        
+        # loop the graph
+        while zero_indegree_queue:
+            vertex = zero_indegree_queue.popleft()
+            path.append(vertex)
+            for neighbor in neighbors[vertex]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    zero_indegree_queue.append(neighbor)
+                    
+        return path if len(path) == numCourses else []
+      
+      
+DFS:
   
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
