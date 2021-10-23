@@ -32,20 +32,17 @@ Priority Queue:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-
-import queue
-
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        q = queue.PriorityQueue()
+        heap = []
         dummy = ListNode()
         cur = dummy
         for node in lists:
             if node:
-                q.put((node.val, id(node), node))
-        while q.qsize():
-            cur.next = q.get()[2]
+                heappush(heap, (node.val, id(node), node))
+        while heap:
+            cur.next = heappop(heap)[2]
             cur = cur.next
             if cur.next:
-                q.put((cur.next.val, id(cur.next), cur.next))
+                heappush(heap, (cur.next.val, id(cur.next), cur.next))
         return dummy.next
