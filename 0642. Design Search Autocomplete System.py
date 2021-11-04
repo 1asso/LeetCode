@@ -39,7 +39,6 @@ class Trie:
         self.value = []
         
 class AutocompleteSystem:
-
     def __init__(self, sentences: List[str], times: List[int]):
         self.root = Trie()
         self.count = {}
