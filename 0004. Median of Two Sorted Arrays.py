@@ -1,3 +1,27 @@
+Better one:
+
+class Solution:
+    def findSmaller(self, nums1: List[int], nums2: List[int], p1: int, p2: int) -> (int, int, int):
+        if p1 == len(nums1) or (p2 < len(nums2) and nums1[p1] > nums2[p2]):
+            return nums2[p2], p1, p2 + 1
+        else:
+            return nums1[p1], p1 + 1, p2
+        
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        p1, p2 = 0, 0
+        size = len(nums1) + len(nums2)
+        half_size = (size + 1) // 2
+        for _ in range(half_size):
+            smaller, p1, p2 = self.findSmaller(nums1, nums2, p1, p2)
+        if size % 2:
+            return smaller
+        else:
+            second_smaller = self.findSmaller(nums1, nums2, p1, p2)[0]
+            return (smaller + second_smaller) / 2
+            
+
+First try:
+
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         if len(nums1) > len(nums2):
