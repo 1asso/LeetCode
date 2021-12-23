@@ -2,14 +2,13 @@ Greedy:
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        res, count = float('-inf'), 0
+        cur_sum, max_sum = 0, float('-inf')
         for i in range(len(nums)):
-            count += nums[i]
-            if count > res:
-                res = count
-            if count < 0:
-                count = 0
-        return res
+            cur_sum += nums[i]
+            max_sum = max(max_sum, cur_sum)
+            if cur_sum < 0:
+                cur_sum = 0
+        return max_sum
         
 
 DP:
