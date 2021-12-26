@@ -24,6 +24,30 @@ class Solution:
         
 Trie:
 
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        word_key = '$'
+        trie = {}
+        for product in products:
+            cur = trie
+            for c in product:
+                cur = cur.setdefault(c, {})
+                if word_key not in cur:
+                    cur[word_key] = []
+                cur[word_key].append(product)
+                cur[word_key].sort()
+                if len(cur[word_key]) > 3:
+                    cur[word_key].pop()
+        res = []
+        for c in searchWord:
+            if trie:
+                trie = trie.get(c, None)
+            res.append(trie[word_key] if trie else [])
+        return res
+        
+
+OR:
+
 class Trie:
     def __init__(self):
         self.children = {}
