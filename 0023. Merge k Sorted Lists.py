@@ -1,4 +1,4 @@
-Divide & Conquer:
+Divide & Conquer (nlogk, n is the total number of nodes in two lists, k is the number of lists):
 
 # Definition for singly-linked list.
 # class ListNode:
