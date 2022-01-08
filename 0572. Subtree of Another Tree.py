@@ -32,28 +32,21 @@ Merkle Hashing O(|S|+|T|):
 #         self.left = left
 #         self.right = right
 class Solution:
-    def hash_func(self, x):
-        from hashlib import sha256
-        s = sha256()
-        x = x.encode('utf-8')
-        s.update(x)
-        return s.hexdigest()
-    
     def merkle(self, node):
         if not node:
-            return "#"
-        m_left = self.merkle(node.left)
-        m_right = self.merkle(node.right)
-        node.merkle = self.hash_func(m_left + str(node.val) + m_right)
+            return '#'
+        l = self.merkle(node.left)
+        r = self.merkle(node.right)
+        node.merkle = str(hash(l + str(node.val) + r))
         return node.merkle
-
+    
     def dfs(self, node, val):
         if not node:
             return False
         return node.merkle == val or \
             self.dfs(node.left, val) or self.dfs(node.right, val)
     
-    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:     
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         self.merkle(root)
         self.merkle(subRoot)
         return self.dfs(root, subRoot.merkle)

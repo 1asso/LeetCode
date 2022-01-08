@@ -39,3 +39,8 @@ class Solution:
                 k -= 1
             else:
                 j += 1
+                
+
+If all elements are distinct:
+
+https://www.geeksforgeeks.org/convert-array-into-zig-zag-fashion/
