@@ -30,7 +30,7 @@ class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
         area = 0
         mono_st = []
-        heights = [0, 0] + heights + [0]
+        heights = [0] + heights + [0]
         
         for i in range(len(heights)):
             while mono_st and heights[mono_st[-1]] > heights[i]:
