@@ -38,7 +38,7 @@ class Codec:
             node.left = dfs()
             node.right = dfs()
             return node
-        data = iter(data.split(' '))
+        data = iter(data.split())
         return dfs()
 
 # Your Codec object will be instantiated and called as such:
