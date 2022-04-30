@@ -9,21 +9,16 @@ class Node:
 """
 
 class Solution:
-    def connect(self, root: 'Node') -> 'Node':
-        if not root:
-            return root
-        q = deque([root])
-        
-        while q:
-            n = len(q)
-            for i in range(n):
-                node = q.popleft()
-                if i < n-1:
-                    node.next = q[0]
-                else:
-                    node.next = None
-                if node.left:
-                    q.append(node.left)
-                if node.right:
-                    q.append(node.right)
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        queue = deque([root])
+        while queue:
+            l = len(queue)
+            for i in range(l):
+                cur = queue.popleft()
+                if cur:
+                    if i < l - 1:
+                        cur.next = queue[0]
+                    else:
+                        cur.next = None
+                    queue.extend([cur.left, cur.right])
         return root
