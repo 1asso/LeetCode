@@ -28,17 +28,15 @@ class Solution:
         return numRooms
       
       
-Priority Queue:
-  
-import queue
+Heap:
+
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        heap = []
         intervals.sort(key=lambda x: x[0])
-        q = queue.PriorityQueue()
-        q.put(intervals[0][1])
-        for i in range(1, len(intervals)):
-            top = q.get()
-            if intervals[i][0] < top:
-                q.put(top)
-            q.put(intervals[i][1])
-        return q.qsize()
+        heapq.heappush(heap, intervals[0][1])
+        for start, end in intervals[1:]:
+            if start >= heap[0]:
+                heapq.heappop(heap)
+            heapq.heappush(heap, end)
+        return len(heap)
